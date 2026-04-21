@@ -7,10 +7,14 @@ async fn health_check() -> HttpResponse {
 }
 
 pub fn run(listener: TcpListener) -> Result<Server, std::io::Error> {
-    let server = HttpServer::new(|| App::new().route("/health_check", web::get().to(health_check)))
-        .listen(listener)
-        .unwrap()
-        .run();
+    let server = HttpServer::new(|| {
+        App::new()
+            .route("/health_check", web::get().to(health_check))
+            .route("/subscriptions", web::post().to(subscribe))
+    })
+    .listen(listener)
+    .unwrap()
+    .run();
     Ok(server)
 }
 #[derive(serde::Deserialize)]
