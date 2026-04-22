@@ -21,7 +21,14 @@ pub fn run(listener: TcpListener) -> Result<Server, std::io::Error> {
 struct FormData {
     email: String,
     name: String,
+    a: i32,
+    b: i32,
 }
 async fn subscribe(form: web::Form<FormData>) -> HttpResponse {
     HttpResponse::Ok().finish()
+}
+
+async fn add(form: web::Form<FormData>) -> HttpResponse {
+    let sum = form.0.a + form.0.b;
+    HttpResponse::Ok().body(sum.to_string())
 }
