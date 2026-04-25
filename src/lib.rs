@@ -1,6 +1,24 @@
 use actix_web::dev::Server;
 use actix_web::{App, HttpResponse, HttpServer, web};
+use serde::ser::{Serialize, SerializeSeq, Serializer};
 use std::net::TcpListener;
+
+
+// impl<T> Serialize for Vec<T>
+// where
+//     T: Serialize,
+// {
+//     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+//     where
+//         S: Serializer,
+//     {
+//         let mut seq = serializer.serialize_seq(Some(self.len()))?;
+//         for element in self {
+//             seq.serialize_element(element)?;
+//         }
+//         seq.end()
+//     }
+// }
 
 async fn health_check() -> HttpResponse {
     HttpResponse::Ok().finish()
@@ -22,7 +40,8 @@ struct FormData {
     email: String,
     name: String,
 }
-async fn subscribe(form: web::Form<FormData>) -> HttpResponse {
+
+// we always return 200 OK for now
+async fn subscribe(_form: web::Form<FormData>) -> HttpResponse {
     HttpResponse::Ok().finish()
 }
-
