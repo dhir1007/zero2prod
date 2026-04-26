@@ -3,7 +3,6 @@ use zero2prod::{configuration::get_configuration, startup::run};
 
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
-
     // panic if we can't read a configuration
     let configuration = get_configuration().expect("Failed to read configuration");
     // We have removed the hard-coded `8000` - it's now coming from our settings!
