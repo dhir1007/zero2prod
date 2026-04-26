@@ -27,13 +27,4 @@ use std::net::TcpListener;
 
 
 
-#[derive(serde::Deserialize)]
-struct FormData {
-    email: String,
-    name: String,
-}
 
-// we always return 200 OK for now
-async fn subscribe(_form: web::Form<FormData>) -> HttpResponse {
-    HttpResponse::Ok().finish()
-}
